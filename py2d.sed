@@ -1,9 +1,9 @@
 
 # Shebang
-s/^#!.*$/#!\/usr\/bin\/env rdmd/
+1s/^#!.*$/#!\/usr\/bin\/env rdmd/
 
 # Imports
-1s/^/import std.stdio, std.range, std.algorithm, std.conv, std.array;\n\n/
+2s/^/import std.stdio, std.range, std.algorithm, std.conv, std.array;\n\n/
 s/import re$/import std.regex;/g
 
 # Strings
@@ -33,7 +33,8 @@ s/(object,\? \?/(/g
 /@property$/d
 
 # Comments
-s/#/\/\//g
+1s/#\([^!]\)/\/\//g
+2,$s/#/\/\//g
 
 # Excptions
 s/except/catch/g
@@ -57,7 +58,7 @@ s/\[:\([^]]\+\)\]/[0..\1]/
 s/\[:\([^:]\]\+\):\([^]]\+\)\]/[\1..\2]/
 
 # End of statement
-/[^/+-*\\:,{}]$/s/$/;/
+/[^\/*-+\\:,{}]$/s/$/;/
 
 # Common equivalences
 s/\(\S\+\)\.join(\([^)]\+\))/\2.join(\1)/g
