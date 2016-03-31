@@ -65,7 +65,7 @@ s/\(\S\+\)\.find(\([^)]\+\))/\1.countUntil(\2)/g
 s/\(\W\)print(\([^)]\+\))/writeln(\1)/g
 s/\(\W\)range(\([^)]\+\))/iota(\1)/g
 s/\(\W\)len(\([^)]\+\))/\1\2.length/g
-s/.append(\([^)]\+\))/~= \2
+s/.append(\([^)]\+\))/~= \2/g
 
 # None
 s/None/null/g
