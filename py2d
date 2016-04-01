@@ -1,0 +1,6 @@
+#!/bin/sh
+
+exec_path="$(realpath "$0")"
+
+sed -f "${exec_path%/*}/py2d.sed" "$@" \
+    > "$(echo "$@" | /bin/sed 's/^\(.*\/\)\?\([^/]\+\)$/\2/;s/\(\.[^\.]\+\)\?$/.d/')"
