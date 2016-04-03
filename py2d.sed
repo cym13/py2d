@@ -28,6 +28,7 @@ s/\s\+not\s\+/ !/g
 s/(self,\?\s\*/(/g
 s/self\./this./g
 s/(object,\?\s\*/(/g
+s/class\s\+\(\w\+\)\s\+\(([^)]\+)\)\? {/class \1 : \2 {/
 
 # Properties
 /@property$/d
@@ -36,13 +37,13 @@ s/(object,\?\s\*/(/g
 1s/#\([^!]\)/\/\//g
 2,$s/#/\/\//g
 
-# Excptions
-s/except/catch/g
+# Exceptions
+s/except\s\*\(.*\)\s\*{/} catch (\1) {/g
 s/raise/throw new/g
 
 # Loops and 'in' operator
-/^\s*\(if\|while\)\s\?/s/\s*\(\S\+\|([^)]\+)\)\s*in\s*\(.\+\)\s*{\s*$/ (\2.canFind(\1)) /g
-/^\s*\(if\|while\)\s\?/s/\s*\(\S\+\|([^)]\+)\)\s*!in\s*\(.\+\)\s*{\s*$/ (!\2.canFind(\1)) /g
+/^\s*\(if\|while\)\s\?/s/\s*\(\S\+\|([^)]\+)\)\s\+in\s*\(.\+\)\s*{\s*$/ (\2.canFind(\1)) /g
+/^\s*\(if\|while\)\s\?/s/\s*\(\S\+\|([^)]\+)\)\s\+!in\s*\(.\+\)\s*{\s*$/ (!\2.canFind(\1)) /g
 /^\s*for\s\?/s/for\s*\(\S\+\|([^)]\+)\)\s\+in\s\+\(.\+\)\s*{\s*$/foreach (\1 ; \2) {/g
 
 # Conditions
@@ -58,7 +59,7 @@ s/\[:\([^]]\+\)\]/[0..\1]/
 s/\[:\([^:]\]\+\):\([^]]\+\)\]/[\1..\2]/
 
 # End of statement
-/[^\/*-+\\:,{}]$/s/$/;/
+/[^\/*-+\\:,{}\n;]$/s/$/;/
 
 # Common equivalences
 s/\(\S\+\)\.join(\([^)]\+\))/\2.join(\1)/g
