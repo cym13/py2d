@@ -12,22 +12,22 @@ s/"""/\/* /
 s/'/"/g
 
 # Functions
-s/def /auto /g
+s/def\s\+/auto /g
 s/:$/ {/g
 
 # Globals
-s/^\(\w\+\) = /auto \1 = /g
+s/^\(\w\+\)\s\+=\s\+/auto \1 = /g
 
 
 # Logic
-s/ or / || /g
-s/ and / \&\& /g
-s/ not / !/g
+s/\s\+or\s\+/ || /g
+s/\s\+and\s\+/ \&\& /g
+s/\s\+not\s\+/ !/g
 
 # Objects
-s/(self,\? \?/(/g
+s/(self,\?\s\*/(/g
 s/self\./this./g
-s/(object,\? \?/(/g
+s/(object,\?\s\*/(/g
 
 # Properties
 /@property$/d
@@ -46,10 +46,10 @@ s/raise/throw new/g
 /^\s*for\s\?/s/for\s*\(\S\+\|([^)]\+)\)\s\+in\s\+\(.\+\)\s*{\s*$/foreach (\1 ; \2) {/g
 
 # Conditions
-/^\s*if /s/if /if (/g
-s/if (\([^)]\+\) {/if (\1) {/g
-s/else /} else /g
-s/elif /} else if /g
+/^\s*if\s\?/s/if\s\+/if (/g
+s/if\s\+(\([^)]\+\)\s\+{/if (\1) {/g
+s/else\s\+/} else /g
+s/elif\s\+/} else if /g
 
 # Ranges
 s/\[:\]/[0..$]/
