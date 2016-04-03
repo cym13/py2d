@@ -41,9 +41,9 @@ s/except/catch/g
 s/raise/throw new/g
 
 # Loops and 'in' operator
-/\s*\(if\|while\) /s/ \(\S\+\) in \(\S\+\)/ (\2.canFind(\1)) /g
-/\s*\(if\|while\) /s/ \(\S\+\) !in \(\S\+\)/ (!\2.canFind(\1)) /g
-/\s*for /s/ \(\S\+\) in \(\S\+\)/ (\1 ; \2) /g
+/^\s*\(if\|while\)\s\?/s/\s*\(\S\+\|([^)]\+)\)\s*in\s*\(.\+\)\s*{\s*$/ (\2.canFind(\1)) /g
+/^\s*\(if\|while\)\s\?/s/\s*\(\S\+\|([^)]\+)\)\s*!in\s*\(.\+\)\s*{\s*$/ (!\2.canFind(\1)) /g
+/^\s*for\s\?/s/for\s*\(\S\+\|([^)]\+)\)\s\+in\s\+\(.\+\)\s*{\s*$/foreach (\1 ; \2) {/g
 
 # Conditions
 /^\s*if /s/if /if (/g
@@ -63,8 +63,8 @@ s/\[:\([^:]\]\+\):\([^]]\+\)\]/[\1..\2]/
 # Common equivalences
 s/\(\S\+\)\.join(\([^)]\+\))/\2.join(\1)/g
 s/\(\S\+\)\.find(\([^)]\+\))/\1.countUntil(\2)/g
-s/\(\W\)print(\([^)]\+\))/writeln(\1)/g
-s/\(\W\)range(\([^)]\+\))/iota(\1)/g
+s/\(\W\)print(\([^)]\+\))/\1writeln(\2)/g
+s/\(\W\)range(\([^)]\+\))/\1iota(\2)/g
 s/\(\W\)len(\([^)]\+\))/\1\2.length/g
 s/.append(\([^)]\+\))/~= \1/g
 
